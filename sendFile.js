@@ -1,6 +1,7 @@
 'use strict'
 const fs = require('fs');
 const debug = require('debug')('sendFile');
+const mime = require('mime');
 
 function sendFile (reqUrl, res) {
     let fileStream;
@@ -16,6 +17,9 @@ function sendFile (reqUrl, res) {
         res.statusCode = 404;
         res.end();
     })
+
+    res.setHeader('Content-Type', `${mime.getType(`public${reqUrl}`)};charset=utf-8`);
+
     fileStream.pipe(res);
 
     res.on('close', () => {
