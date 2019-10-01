@@ -1,10 +1,10 @@
 'use strict'
 const fs = require('fs');
+const debug = require('debug')('sendFile');
 
 function sendFile (reqUrl, res) {
-    console.log(reqUrl);
     let fileStream;
-    
+
     if(reqUrl === '/') {
         fileStream = fs.ReadStream(`public/index.html`);
     } else {
@@ -12,6 +12,7 @@ function sendFile (reqUrl, res) {
     };
 
     fileStream.on('error', (err) => {
+        debug(`Ошибка чтения файла ${err}`);
         res.statusCode = 404;
         res.end();
     })
@@ -19,6 +20,7 @@ function sendFile (reqUrl, res) {
 
     res.on('close', () => {
         fileStream.destroy();
+        debug('Прерванное соединение');
     })
 };
 

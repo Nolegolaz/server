@@ -11,6 +11,6 @@
     },
     "description": "simple server for echo",
     "dependencies": {
-        "mime": "^2.4.4"
+        "debug": "^4.1.1"
     }
 }
