@@ -1,4 +1,5 @@
 'use strict';
+process.env.DEBUG='*';
 const http = require('http');
 const sendFile = require('./sendFile');
 const debug = require('debug')('server');
