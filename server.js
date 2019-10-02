@@ -2,6 +2,7 @@
 const http = require('http');
 const sendFile = require('./sendFile');
 const debug = require('debug')('server');
+const config = require('./config');
 
 const server = http.createServer((req, res) => {
     let reqUrl = '';
@@ -21,6 +22,6 @@ const server = http.createServer((req, res) => {
     } else {
         sendFile(reqUrl, res);
     };
-}).listen(3000, 'localhost');
+}).listen(config.get('port'), config.get('host'));
 
 debug('server start');
